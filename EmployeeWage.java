@@ -6,47 +6,67 @@ public class EmployeeWage {
      public static final int IS_PART_TIME = 1;
 	 public static final int IS_FUll_TIME = 2;
 
-	    public static int computeEmployeeWage(String company, int employeeRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth) {
-	    	
-	        int totalEmployeeHours = 0;
-	        int  totalWorkingDays = 0;
+	 int totalEmpWage = 0;
+     public final String company;
+     public final int empRatePerHour;
+     public final int numOfWorkingDays;
+     public final int maxHoursPerMonth;
+     public EmployeeWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+	      this.company = company;
+	      this.empRatePerHour = empRatePerHour;
+	      this.numOfWorkingDays = numOfWorkingDays;
+	      this.maxHoursPerMonth = maxHoursPerMonth;
+	    }
 
-	        while (totalEmployeeHours <= maxHoursPerMonth && totalWorkingDays < numberOfWorkingDays) {
+	    public void computeEmployeeWage() {
+	        int totalEmpHrs = 0, totalWorkingDays = 0;
 
-	            int employeeHours = 0;
+	        while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays) {
+
+	            int empHrs = 0;
 	            totalWorkingDays++;
 
-	            int employeeCheck = (int) Math.floor(Math.random() * 10) % 3;
+	            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
 
-	            switch (employeeCheck) {
+	            switch (empCheck) {
 
 	                case IS_FUll_TIME:
-	                    employeeHours = 8;
+	                    empHrs = 8;
 	                    break;
 
 	                case IS_PART_TIME:
-	                    employeeHours = 4;
+	                    empHrs = 4;
 	                    break;
 
 	                default:
-	                    employeeHours = 0;
+	                    empHrs = 0;
 	            }
 
-	            totalEmployeeHours += employeeHours;
-	            System.out.println("Day " +totalWorkingDays+  " :"  + " " + "Emp Hrs : " + employeeHours);
+	            totalEmpHrs += empHrs;
+	            System.out.println("Day " + totalWorkingDays + " :" + " " + "Emp Hrs : " + empHrs);
 	        }
-	        int totalEmployeeWage = totalEmployeeHours * employeeRatePerHour;
-	        System.out.println("Total Employee wage for company : " + company + " is :" + totalEmployeeWage);
-	        return totalEmployeeWage;
+	        totalEmpWage = totalEmpHrs * empRatePerHour;
+	    }
 
+	    @Override
+	    public String toString() {
+	        return "EmployeeWage{" + "company='" + company + '\'' +", empRatePerHour=" + empRatePerHour +
+	                ", empRatePerHour=" + empRatePerHour +", numOfWorkingDays=" + numOfWorkingDays +
+	                ", maxHoursPerMonth=" + maxHoursPerMonth +
+	                ",Total employee wage for company : " + company + " " + "is:" + totalEmpWage +'}';
+	                
 	    }
 
 	    public static void main(String[] args) {
 
-	        computeEmployeeWage("WIPRO", 20, 2, 10);
-	        computeEmployeeWage("INFOSYS", 10, 3, 20);
+	        EmployeeWage wipro = new EmployeeWage("WIPRO", 20, 2, 10);
+	        EmployeeWage infosys = new EmployeeWage("INFOSYS", 10, 2, 10);
+
+	        wipro.computeEmployeeWage();
+	        System.out.println(wipro);
+
+	        infosys.computeEmployeeWage();
+	        System.out.println(infosys);
+
 	    }
-	}
-
-
-	        		    
+	}	        		    
