@@ -3,73 +3,50 @@ package com.bridgelabz.employeeWage;
 
 public class EmployeeWage {
 
-      static final int IS_FULL_TIME = 1;
-      static final int IS_PART_TIME = 2;
-      static final int IS_ABSENT = 0;
-      static final int EMP_WAGE_PER_HOUR = 20;
-      static final int EMP_FULL_DAY_HOUR = 8;
-      static final int EMP_HALF_DAY_HOUR = 4;
-      static final int TOTAL_WORKING_DAYS = 20;
-      static final int TOTAL_WORKING_HOURS = 100;
-		    
-		   int workingHour = 0;
-		   int countFullDaysWorking = 0;
-		   int countHalfDayWorking = 0;
-		   int countAbsentDays = 0;
-		   
-		   public static void main(String[] args) {
+     public static final int IS_PART_TIME = 1;
+	 public static final int IS_FUll_TIME = 2;
 
-		       System.out.println("Welcome to Employee Wage Computation Project");
-		       EmployeeWage  refVar = new EmployeeWage ();
-		       refVar.empAttendance();
-		       refVar.empWageCalculation();
-		    }
+	    public static int computeEmployeeWage(String company, int employeeRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth) {
+	    	
+	        int totalEmployeeHours = 0;
+	        int  totalWorkingDays = 0;
 
-		    void empAttendance() {
+	        while (totalEmployeeHours <= maxHoursPerMonth && totalWorkingDays < numberOfWorkingDays) {
 
-		        for (int day = 0; day < TOTAL_WORKING_DAYS; day++) {
-		            if (workingHour > TOTAL_WORKING_HOURS) {
-		                workingHour = TOTAL_WORKING_HOURS;
-		                break;
-		            }
-		            double empCheck = Math.floor(Math.random() * 10) % 3;
-		            switch ((int) empCheck) {
-		                case IS_FULL_TIME:
-		                    workingHour += EMP_FULL_DAY_HOUR;
-		                    countFullDaysWorking++;
-		                    break;
-		                    
-		                case IS_PART_TIME:
-		                    workingHour += EMP_HALF_DAY_HOUR;
-		                    countHalfDayWorking++;
-		                    break;
-		                    
-		                case IS_ABSENT:
-		                    countAbsentDays++;
-		            }
-		        }
-		    }
+	            int employeeHours = 0;
+	            totalWorkingDays++;
 
-		    void empWageCalculation() {
+	            int employeeCheck = (int) Math.floor(Math.random() * 10) % 3;
 
-		        int employeeWage;
-		        int totalWorkingDays;
+	            switch (employeeCheck) {
 
-		        if (countAbsentDays == TOTAL_WORKING_DAYS)
-		           System.out.println("Employee is absent for month");
+	                case IS_FUll_TIME:
+	                    employeeHours = 8;
+	                    break;
 
-		        employeeWage = workingHour * EMP_WAGE_PER_HOUR;
-		        totalWorkingDays = countFullDaysWorking + countHalfDayWorking;
-		        System.out.println("Employee is Absent for : " + countAbsentDays + " days.");
-		        System.out.println("Employee is Half day present for : " + countHalfDayWorking + " days.");
-		        System.out.println("Employee is full day present for : " + countFullDaysWorking + " days.");
-		        System.out.println("Employee total working hour is : " + workingHour + " hrs");
-		        System.out.println("Employee is present for " + totalWorkingDays + " days in a month and wage is : " + employeeWage);
-		    }
-		}
+	                case IS_PART_TIME:
+	                    employeeHours = 4;
+	                    break;
+
+	                default:
+	                    employeeHours = 0;
+	            }
+
+	            totalEmployeeHours += employeeHours;
+	            System.out.println("Day " +totalWorkingDays+  " :"  + " " + "Emp Hrs : " + employeeHours);
+	        }
+	        int totalEmployeeWage = totalEmployeeHours * employeeRatePerHour;
+	        System.out.println("Total Employee wage for company : " + company + " is :" + totalEmployeeWage);
+	        return totalEmployeeWage;
+
+	    }
+
+	    public static void main(String[] args) {
+
+	        computeEmployeeWage("WIPRO", 20, 2, 10);
+	        computeEmployeeWage("INFOSYS", 10, 3, 20);
+	    }
+	}
 
 
-
-		        
-		        
-		        		    
+	        		    
