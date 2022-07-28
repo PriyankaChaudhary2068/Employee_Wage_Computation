@@ -4,9 +4,9 @@ package com.bridgelabz.employeeWage;
 public class EmployeeWage {
 
      public static final int IS_PART_TIME = 1;
-	 public static final int IS_FUll_TIME = 2;
+     public static final int IS_FUll_TIME = 2;
 
-	 int totalEmpWage = 0;
+     int totalEmpWage = 0;
      public final String company;
      public final int empRatePerHour;
      public final int numOfWorkingDays;
